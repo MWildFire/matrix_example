@@ -37,7 +37,6 @@ matrix_t matrix( std::string const & representation )
     matrix_t result;
     
     std::istringstream istream{ representation };
-    assert( result.read( istream ) );
     
     return result;
 }
