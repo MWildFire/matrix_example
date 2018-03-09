@@ -1,4 +1,5 @@
 #include "matrix.hpp"
+#include <assert.h>
 
 matrix_t::matrix_t() : elements_{ nullptr }, rows_{ 0 }, collumns_{ 0 }
 {
@@ -6,15 +7,46 @@ matrix_t::matrix_t() : elements_{ nullptr }, rows_{ 0 }, collumns_{ 0 }
 
 matrix_t::matrix_t( matrix_t const & other )
 {
+    elements_ = new float *[other.rows_];
+    for (std::size_t i = 0; i < other.rows_; i++)
+    {
+        elements_[i] = new float [other.collumns_];
+        for (std::size_t j = 0; j < other.collumns_; j++)
+        {
+            elements_[i][j] = other.elements_[i][j];
+        }
+        rows_ = other.rows_;
+        collumns_ = other.collumns_;
+    }
 }
 
 matrix_t & matrix_t::operator =( matrix_t const & other )
 {
-	return *this;
+    if (this == &other)
+    {
+        return *this;
+    }
+    elements_ = new float *[other.rows_];
+    for (std::size_t i = 0; i < other.rows_; i++)
+    {
+        elements_[i] = new float [other.collumns_];
+        for (std::size_t j = 0; j < other.collumns_; j++)
+        {
+            elements_[i][j] = other.elements_[i][j];
+        }
+        rows_ = other.rows_;
+        collumns_ = other.collumns_;
+    }
+    return *this;
 }
 
 matrix_t::~matrix_t()
 {
+    for( std::size_t i = 0; i < rows_; ++i )
+    {
+        delete [] elements_[ i ];
+    }
+    delete [] elements_;
 }
 
 std::size_t matrix_t::rows() const
@@ -29,38 +61,85 @@ std::size_t matrix_t::collumns() const
 
 matrix_t matrix_t::operator +( matrix_t const & other ) const
 {
-	matrix_t result;
-
-	return result;
+    assert(collumns_ == other.collumns() && rows_ == other.rows());
+    matrix_t result;
+    result.elements_ = new float * [rows_];
+    for (std::size_t i = 0; i < rows_; ++ i)
+    {
+        result.elements_ [i] = new float [collumns_];
+        for (std::size_t j = 0; j < collumns_; ++j)
+        {
+            result.elements_ [i][j] = elements_ [i][j] + other.elements_ [i][j];
+        }
+    }
+    result.rows_ = rows_;
+    result.collumns_ = collumns_;
+    return result;
 }
 
 matrix_t matrix_t::operator -( matrix_t const & other ) const
 {
-	matrix_t result;
-
-	return result;
+    assert(collumns_ == other.collumns() && rows_ == other.rows());
+    matrix_t result;
+    result.elements_ = new float * [rows_];
+    for (std::size_t i = 0; i < rows_; ++ i)
+    {
+        result.elements_ [i] = new float [collumns_];
+        for (std::size_t j = 0; j < collumns_; ++j)
+        {
+            result.elements_ [i][j] = elements_ [i][j] - other.elements_ [i][j];
+        }
+    }
+    result.rows_ = rows_;
+    result.collumns_ = collumns_;
+    return result;
 }
 
 matrix_t matrix_t::operator *( matrix_t const & other ) const
 {
-	matrix_t result;
-
-	return result;
+    assert(collumns_ == other.rows());
+    matrix_t result;
+    result.elements_ = new float * [rows_];
+    for (std::size_t i = 0; i < rows_; i++)
+    {
+        result.elements_[i] = new float [collumns_];
+        for (std::size_t j = 0; j < collumns_; j++)
+        {
+            result.elements_[i][j] = 0;
+        }
+    }
+    for (std::size_t i = 0; i < rows_; i++)
+    {
+        for (std::size_t j = 0; j < other.collumns_; j++)
+        {
+            for (std::size_t z = 0; z < collumns_; z++)
+            {
+                result.elements_[i][j] += elements_[i][z] * other.elements_[z][j];
+            }
+        }
+    }
+    /* умножение строку первой матрицы на столбец второй, чтобы получить столбец третьей*/
+    result.rows_ = rows_;
+    result.collumns_ = other.collumns_;
+    return result;
 }
 
 matrix_t & matrix_t::operator -=( matrix_t const & other )
 {
-	return *this;
+    *this = *this - other;
+    return *this;
 }
 
 matrix_t & matrix_t::operator +=( matrix_t const & other )
 {
-	return *this;
+    *this = *this + other;
+    return *this;
 }
 
 matrix_t & matrix_t::operator *=( matrix_t const & other )
 {
-	return *this;
+    *this = *this * other;
+    return *this;
 }
 
 std::istream & matrix_t::read( std::istream & stream )
@@ -107,7 +186,7 @@ std::istream & matrix_t::read( std::istream & stream )
         stream.setstate( std::ios_base::failbit );
     }
     
-	return stream;
+    return stream;
 }
 
 std::ostream & matrix_t::write( std::ostream & stream ) const
@@ -123,5 +202,5 @@ std::ostream & matrix_t::write( std::ostream & stream ) const
         }
     }
     
-	return stream;
+    return stream;
 }
