@@ -43,8 +43,8 @@ TEST_CASE("copying matrix")
     REQUIRE( matrix.read(istream));
     
     matrix_t copy(matrix);
-    REQUIRE( copy.rows() = 3)
-    REQUIRE( copy.collumns() = 3)
+    REQUIRE( copy.rows() == 3)
+    REQUIRE( copy.collumns( == 3)
 }
     
 TEST_CASE("adding matrix")
@@ -73,11 +73,11 @@ TEST_CASE("adding matrix")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE(matrix1.rows() = 3);
-    REQUIRE(matrix1.collumns() = 3);
+    REQUIRE(matrix1.rows() == 3);
+    REQUIRE(matrix1.collumns() == 3);
         
-    REQUIRE(matrix2.rows() = 3);
-    REQUIRE(matrix2.collumns() = 3);
+    REQUIRE(matrix2.rows() == 3);
+    REQUIRE(matrix2.collumns() == 3);
     
     std::ostringstream stream;
     (matrix1+matrix2).write(stream);
@@ -111,11 +111,11 @@ TEST_CASE("substracting matrix")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE(matrix1.rows() = 3);
-    REQUIRE(matrix1.collumns() = 3);
+    REQUIRE(matrix1.rows() == 3);
+    REQUIRE(matrix1.collumns() == 3);
         
-    REQUIRE(matrix2.rows() = 3);
-    REQUIRE(matrix2.collumns() = 3);
+    REQUIRE(matrix2.rows() == 3);
+    REQUIRE(matrix2.collumns() == 3);
     
     std::ostringstream stream;
     (matrix1-matrix2).write(stream);
