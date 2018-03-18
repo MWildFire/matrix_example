@@ -30,15 +30,6 @@ TEST_CASE("reading matrix")
     REQUIRE( input == ostream.str() );
 }
 
-TEST_CASE("creating matrix with params")
-{
-    int value = 10;
-    matrix_t matrix(value,value)
-        
-    REQUIRE( matrix.rows() == 10 );
-    REQUIRE( matrix.collumns() == 10 );
-}
-
 TEST_CASE("copying matrix")
 {
     std::string input
