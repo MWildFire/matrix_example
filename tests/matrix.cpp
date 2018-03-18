@@ -43,8 +43,8 @@ TEST_CASE("copying matrix")
     REQUIRE( matrix.read(istream));
     
     matrix_t copy(matrix);
-    REQUIRE( copy.rows() == 3)
-    REQUIRE( copy.collumns( == 3)
+    REQUIRE( copy.rows() == 3);
+    REQUIRE( copy.collumns() == 3);
 }
     
 TEST_CASE("adding matrix")
@@ -285,7 +285,7 @@ TEST_CASE(assignment with substraction)
     
     matrix1 -= matrix2;
     std::ostringstream ostream;
-	matrix1.write( ostream );
+    matrix1.write( ostream );
     
     REQUIRE (input3 == ostream.str());
 }
