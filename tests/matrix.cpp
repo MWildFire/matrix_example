@@ -123,7 +123,7 @@ TEST_CASE("substracting matrix")
     REQUIRE( input3 == stream.str());
 }
 
-TEST_CASE(multiplication matrix)
+TEST_CASE ("multiplication matrix")
 {
     std::string input
     {
@@ -150,12 +150,12 @@ TEST_CASE(multiplication matrix)
     REQUIRE(matrix2.read(istream2));
     
     std::ostringstream stream;
-    (matrix_1 * matrix_2).write( ostream );
+    (matrix1 * matrix2).write( stream );
     
     REQUIRE( input3 == stream.str() );
 }
 
-TEST_CASE(assignment matrix)
+TEST_CASE ("assignment matrix")
 {
     std::string input
     {
@@ -176,10 +176,10 @@ TEST_CASE(assignment matrix)
     REQUIRE(matrix2.read(istream2));
     
     matrix1 = matrix2;
-    std::ostringstream ostream;
-	matrix1.write( ostream );
+    std::ostringstream stream;
+    matrix1.write( stream );
     
-    REQUIRE( input2 == ostream.str() );
+    REQUIRE( input2 == stream.str() );
 }   
 
 TEST_CASE(assignment with multiplicatiom)
@@ -216,13 +216,13 @@ TEST_CASE(assignment with multiplicatiom)
     REQUIRE(matrix2.read(istream2));
     
     matrix1 *= matrix2;
-    std::ostringstream ostream;
-	matrix1.write( ostream );
+    std::ostringstream stream;
+	matrix1.write( stream );
     
-    REQUIRE (input3 == ostream.str());
+    REQUIRE (input3 == stream.str());
 }
 
-TEST_CASE(assignment with adding)
+TEST_CASE ("assignment with adding")
 {
     std::string input
     {
@@ -250,13 +250,13 @@ TEST_CASE(assignment with adding)
     REQUIRE(matrix2.read(istream2));
     
     matrix1 += matrix2;
-    std::ostringstream ostream;
-	matrix1.write( ostream );
+    std::ostringstream stream;
+    matrix1.write( stream );
     
-    REQUIRE (input3 == ostream.str());
+    REQUIRE (input3 == stream.str());
 }
 
-TEST_CASE(assignment with substraction)
+TEST_CASE ("assignment with substraction")
 {
     std::string input
     {
@@ -284,9 +284,9 @@ TEST_CASE(assignment with substraction)
     REQUIRE(matrix2.read(istream2));
     
     matrix1 -= matrix2;
-    std::ostringstream ostream;
-    matrix1.write( ostream );
+    std::ostringstream stream;
+    matrix1.write( stream );
     
-    REQUIRE (input3 == ostream.str());
+    REQUIRE (input3 == stream.str());
 }
 
