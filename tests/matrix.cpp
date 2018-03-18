@@ -182,7 +182,7 @@ TEST_CASE ("assignment matrix")
     REQUIRE( input2 == stream.str() );
 }   
 
-TEST_CASE(assignment with multiplicatiom)
+TEST_CASE ("assignment with multiplication")
 {
     std::string input
     {
@@ -190,12 +190,6 @@ TEST_CASE(assignment with multiplicatiom)
         "1 1 1\n"
         "2 2 2\n"
         "3 3 3" };
-    std::string input2
-    {
-        "3, 3\n"
-        "3 3 3\n"
-        "4 4 4\n"
-        "5 5 5" };
     std::string input2
     {
         "3, 3\n"
@@ -217,7 +211,7 @@ TEST_CASE(assignment with multiplicatiom)
     
     matrix1 *= matrix2;
     std::ostringstream stream;
-	matrix1.write( stream );
+    matrix1.write( stream );
     
     REQUIRE (input3 == stream.str());
 }
