@@ -44,8 +44,8 @@ TEST_CASE("copying matrix")
     REQUIRE( matrix.read(istream));
     
     matrix_t copy(matrix);
-    REQUIRE( copy.rows() = 3)
-    REQUIRE( copy.collumns() = 3)
+    REQUIRE( copy.rows() == 3)
+    REQUIRE( copy.collumns() == 3)
 }
     
 TEST_CASE("adding matrix")
@@ -74,12 +74,14 @@ TEST_CASE("adding matrix")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE(matrix1.rows() = 3);
-    REQUIRE(matrix1.collumns() = 3);
+    REQUIRE(matrix1.rows() == 3);
+    REQUIRE(matrix1.collumns() == 3);
         
-    REQUIRE(matrix2.rows() = 3);
-    REQUIRE(matrix2.collumns() = 3);
+    REQUIRE(matrix2.rows() == 3);
+    REQUIRE(matrix2.collumns() == 3);
+	
     REQUIRE_NOTHROW( collumns_ == other.collumns() && rows_ == other.rows() )
+	  
     std::ostringstream stream;
     (matrix1+matrix2).write(stream);
     
@@ -112,11 +114,11 @@ TEST_CASE("substracting matrix")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE(matrix1.rows() = 3);
-    REQUIRE(matrix1.collumns() = 3);
+    REQUIRE(matrix1.rows() == 3);
+    REQUIRE(matrix1.collumns() == 3);
         
-    REQUIRE(matrix2.rows() = 3);
-    REQUIRE(matrix2.collumns() = 3);
+    REQUIRE(matrix2.rows() == 3);
+    REQUIRE(matrix2.collumns() == 3);
     
     REQUIRE_NOTHROW( collumns_ == other.collumns() && rows_ == other.rows() )
     
@@ -126,7 +128,7 @@ TEST_CASE("substracting matrix")
     REQUIRE( input3 == stream.str());
 }
 
-TEST_CASE(multiplication matrix)
+TEST_CASE ("multiplication matrix")
 {
     std::string input
     {
@@ -160,7 +162,7 @@ TEST_CASE(multiplication matrix)
     REQUIRE( input3 == stream.str() );
 }
 
-TEST_CASE(assignment matrix)
+TEST_CASE ("assignment matrix")
 {
     std::string input
     {
@@ -184,12 +186,12 @@ TEST_CASE(assignment matrix)
     
     matrix1 = matrix2;
     std::ostringstream ostream;
-	matrix1.write( ostream );
+    matrix1.write( ostream );
     
     REQUIRE( input2 == ostream.str() );
 }   
 
-TEST_CASE(assignment with multiplicatiom)
+TEST_CASE ("assignment with multiplication")
 {
     std::string input
     {
@@ -226,12 +228,12 @@ TEST_CASE(assignment with multiplicatiom)
     
     matrix1 *= matrix2;
     std::ostringstream ostream;
-	matrix1.write( ostream );
+    matrix1.write( ostream );
     
     REQUIRE (input3 == ostream.str());
 }
 
-TEST_CASE(assignment with adding)
+TEST_CASE("assignment with adding")
 {
     std::string input
     {
@@ -262,12 +264,12 @@ TEST_CASE(assignment with adding)
     
     matrix1 += matrix2;
     std::ostringstream ostream;
-	matrix1.write( ostream );
+    matrix1.write( ostream );
     
     REQUIRE (input3 == ostream.str());
 }
 
-TEST_CASE(assignment with substraction)
+TEST_CASE("assignment with substraction")
 {
     std::string input
     {
@@ -298,7 +300,7 @@ TEST_CASE(assignment with substraction)
     
     matrix1 -= matrix2;
     std::ostringstream ostream;
-	matrix1.write( ostream );
+    matrix1.write( ostream );
     
     REQUIRE (input3 == ostream.str());
 }
