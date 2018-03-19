@@ -80,7 +80,7 @@ TEST_CASE("adding matrix")
     REQUIRE(matrix2.rows() == 3);
     REQUIRE(matrix2.collumns() == 3);
 	
-    REQUIRE_NOTHROW( collumns_ == other.collumns() && rows_ == other.rows() )
+    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() );
 	  
     std::ostringstream stream;
     (matrix1+matrix2).write(stream);
@@ -120,7 +120,7 @@ TEST_CASE("substracting matrix")
     REQUIRE(matrix2.rows() == 3);
     REQUIRE(matrix2.collumns() == 3);
     
-    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() )
+    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() );
     
     std::ostringstream stream;
     (matrix1-matrix2).write(stream);
@@ -154,10 +154,10 @@ TEST_CASE ("multiplication matrix")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.rows() )
+    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.rows() );
         
     std::ostringstream stream;
-    (matrix_1 * matrix_2).write( stream );
+    (matrix1 * matrix_2).write( stream );
     
     REQUIRE( input3 == stream.str() );
 }
@@ -182,7 +182,7 @@ TEST_CASE ("assignment matrix")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() )
+    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() );
     
     matrix1 = matrix2;
     std::ostringstream ostream;
@@ -224,7 +224,7 @@ TEST_CASE ("assignment with multiplication")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.rows() )
+    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.rows() );
     
     matrix1 *= matrix2;
     std::ostringstream ostream;
@@ -260,7 +260,7 @@ TEST_CASE("assignment with adding")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() )
+    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() );
     
     matrix1 += matrix2;
     std::ostringstream ostream;
@@ -296,7 +296,7 @@ TEST_CASE("assignment with substraction")
     REQUIRE(matrix1.read(istream1));
     REQUIRE(matrix2.read(istream2));
     
-    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() )
+    REQUIRE_NOTHROW( matrix1.collumns() == matrix2.collumns() && matrix1.rows() == matrix2.rows() );
     
     matrix1 -= matrix2;
     std::ostringstream ostream;
