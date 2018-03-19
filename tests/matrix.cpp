@@ -157,7 +157,7 @@ TEST_CASE ("multiplication matrix")
     REQUIRE_NOTHROW( matrix1.collumns() == matrix2.rows() );
         
     std::ostringstream stream;
-    (matrix1 * matrix_2).write( stream );
+    (matrix1 * matrix2).write( stream );
     
     REQUIRE( input3 == stream.str() );
 }
@@ -199,12 +199,6 @@ TEST_CASE ("assignment with multiplication")
         "1 1 1\n"
         "2 2 2\n"
         "3 3 3" };
-    std::string input2
-    {
-        "3, 3\n"
-        "3 3 3\n"
-        "4 4 4\n"
-        "5 5 5" };
     std::string input2
     {
         "3, 3\n"
