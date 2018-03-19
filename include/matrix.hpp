@@ -245,5 +245,5 @@ std::ostream & matrix_t<T>::write( std::ostream & stream ) const
 }
 
 
-#endif /* matrix_hpp */
+
 
