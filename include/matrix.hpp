@@ -2,7 +2,7 @@
 #include <cassert>
 
 template<typename T>
-class matrix_t<T> {
+class matrix_t {
 private:
     T ** elements_;
     std::size_t rows_;
@@ -191,7 +191,7 @@ std::istream & matrix_t<T>::read( std::istream & stream )
     if( stream >> rows && stream >> symbol && symbol == ',' && stream >> collumns ) {
         T ** elements = new T *[ rows ];
         for( std::size_t i = 0; success && i < rows; ++i ) {
-            elements[ i ] = new float[ collumns ];
+            elements[ i ] = new T[ collumns ];
             for( std::size_t j = 0; j < collumns; ++j ) {
                 if( !( stream >> elements[ i ][ j ] ) ) {
                     success = false;
